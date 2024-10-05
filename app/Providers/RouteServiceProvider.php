@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\RedirectSlug;
+use App\Http\Middleware\SetDefaultCityForUrls;
+use App\Http\Middleware\Slug;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -28,12 +31,18 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::prefix('{city?}')->middleware([
+                'web',
+                RedirectSlug::class,
+                Slug::class,
+                SetDefaultCityForUrls::class
+            ])
                 ->group(base_path('routes/web.php'));
         });
     }
