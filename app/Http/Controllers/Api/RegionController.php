@@ -35,7 +35,7 @@ class RegionController extends Controller
      */
     public function show(string $id)
     {
-        return new RegionResource(Region::with('region')->findOrFail($id));
+        return new RegionResource(Region::findOrFail($id));
     }
 
     /**
@@ -43,7 +43,8 @@ class RegionController extends Controller
      */
     public function update(RegionUpdateRequest $request, Region $region)
     {
-        return new RegionResource($region->update($request->validated()));
+        $region->update($request->validated());
+        return new RegionResource($region);
     }
 
     /**

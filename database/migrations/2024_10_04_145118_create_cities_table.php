@@ -16,7 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->foreignIdFor(Region::class);
+            $table->foreignIdFor(Region::class)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->index(['region_id', 'slug'])->unique();
             $table->timestamps();
         });

@@ -24,7 +24,7 @@ class CityStoreRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable|string', 'max:255'],
-            'region_id' => ['required', 'integer'],
+            'region_id' => ['required', 'exists:App\Models\Region,id'],
         ];
     }
 }

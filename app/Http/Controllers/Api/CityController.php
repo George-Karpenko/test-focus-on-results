@@ -43,7 +43,8 @@ class CityController extends Controller
      */
     public function update(CityUpdateRequest $request, City $city)
     {
-        return new CityResource($city->update($request->validated()));
+        $city->update($request->validated());
+        return new CityResource($city);
     }
 
     /**

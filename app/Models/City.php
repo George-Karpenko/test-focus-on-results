@@ -20,6 +20,7 @@ class City extends Model
     protected $fillable = [
         'name',
         'slug',
+        'region_id',
     ];
 
     /**
