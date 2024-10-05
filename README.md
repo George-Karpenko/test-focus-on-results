@@ -8,6 +8,8 @@ cd test-focus-on-results
 composer install
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan migrate
+npm i
+npm run dev
 ```
 
 ## парсер
